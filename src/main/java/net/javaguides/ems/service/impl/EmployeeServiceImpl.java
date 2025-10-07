@@ -41,4 +41,16 @@ public class EmployeeServiceImpl implements EmployeeService {
         .map(employeeMapper::toEmployeeDto)// chuyển employee => employeeDTO
         .collect(Collectors.toList());// nhóm các employeeDTO thành 1 list
   }
+
+  @Override
+  public EmployeeDto updateEmployee(Long id, EmployeeDto employeeDto) {
+    Employee employee = employeeRepository.findById(id)
+        .orElseThrow(() -> new ResourceNotFoundException("Employee is not exit with given id: " + id));
+
+    employee.setFirstName(employeeDto.getFirstName());
+    employee.setLastName(employeeDto.getLastName());
+    employee.setEmail(employeeDto.getEmail());
+
+    return employeeMapper.toEmployeeDto(employeeRepository.save(employee));
+  }
 }
