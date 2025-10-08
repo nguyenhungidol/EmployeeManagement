@@ -31,3 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Ignore frontend dependencies
+/frontend/node_modules/
+
+# Ignore frontend build output
+/frontend/build/
+/frontend/dist/
